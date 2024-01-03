@@ -13,8 +13,8 @@ android {
         applicationId = "mohalim.ai.askai"
         minSdk = 24
         targetSdk = 33
-        versionCode = 3
-        versionName = "1.03"
+        versionCode = 4
+        versionName = "1.04"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -74,6 +74,7 @@ dependencies {
     implementation("io.coil-kt:coil-compose:2.4.0")
     implementation("io.coil-kt:coil-gif:2.4.0")
 
+    implementation("com.google.android.gms:play-services-ads:22.6.0")
 }
 
 // Allow references to generated code

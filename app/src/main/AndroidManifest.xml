@@ -15,6 +15,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AskAIأسالالذكاءالاصطناعي"
         tools:targetApi="31">
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-5350581213670869~8098480313" />
+
         <activity
             android:name=".ui.chat.ChatAIActivity"
             android:exported="false" />

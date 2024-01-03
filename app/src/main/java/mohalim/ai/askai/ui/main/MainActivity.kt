@@ -1,17 +1,14 @@
 package mohalim.ai.askai.ui.main
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.graphics.Color.parseColor
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.compose.setContent
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -35,9 +32,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.googlefonts.Font
 import androidx.compose.ui.text.googlefonts.GoogleFont
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.viewinterop.AndroidView
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdSize
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import dagger.hilt.android.AndroidEntryPoint
 import mohalim.ai.askai.R
 import mohalim.ai.askai.ui.chat.ChatAIActivity
+
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -45,8 +48,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MainActivityUI(this@MainActivity)
-
         }
+
+        MobileAds.initialize(this) { }
 
     }
 }
@@ -156,6 +160,22 @@ fun MainActivityUI(context: Activity) {
                 Text(text = "اصنع صور من مخيلتك", fontFamily = fontFamily)
             }
         }
+
+        Spacer(modifier = Modifier.height(50.dp))
+
+        val addview = AdView(context)
+        addview.setAdSize(AdSize.LARGE_BANNER)
+
+        AndroidView(
+            modifier = Modifier.fillMaxWidth(),
+            factory = { context ->
+
+                addview.apply {
+                    adUnitId = context.getString(R.string.ad_id_banner)
+                    loadAd(AdRequest.Builder().build())
+                }
+            }
+        )
 
     }
 }

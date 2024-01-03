@@ -6,6 +6,7 @@ import android.graphics.drawable.AnimatedImageDrawable
 import android.os.Build.VERSION.SDK_INT
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.ViewGroup
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
@@ -35,6 +36,10 @@ import coil.ImageLoader
 import coil.compose.rememberAsyncImagePainter
 import coil.decode.GifDecoder
 import coil.decode.ImageDecoderDecoder
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import dagger.hilt.android.AndroidEntryPoint
 import mohalim.ai.askai.R
 import javax.inject.Inject
@@ -43,6 +48,9 @@ import javax.inject.Inject
 class ChatAIActivity : AppCompatActivity() {
     @Inject
     lateinit var webView: WebView;
+
+    private var mInterstitialAd: InterstitialAd? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,8 +64,38 @@ class ChatAIActivity : AppCompatActivity() {
         setContent {
             ChatAIActivityUI(webView = webView, context = this@ChatAIActivity)
         }
+
+        var adRequest = AdRequest.Builder().build()
+        InterstitialAd.load(
+            this,
+            "ca-app-pub-5350581213670869/3777365388",
+            adRequest,
+            object : InterstitialAdLoadCallback() {
+                override fun onAdFailedToLoad(adError: LoadAdError) {
+                    adError?.toString()?.let { Log.d("TAG", it) }
+                    mInterstitialAd = null
+                }
+
+                override fun onAdLoaded(interstitialAd: InterstitialAd) {
+                    Log.d("TAG", "Ad was loaded.")
+                    mInterstitialAd = interstitialAd
+                }
+            })
+
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+
+        if (mInterstitialAd != null) {
+            mInterstitialAd?.show(this)
+        } else {
+            Log.d("TAG", "The interstitial ad wasn't ready yet.")
+        }
+
     }
 }
+
 
 @Composable
 fun ChatAIActivityUI(
