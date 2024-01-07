@@ -13,8 +13,8 @@ android {
         applicationId = "mohalim.ai.askai"
         minSdk = 24
         targetSdk = 33
-        versionCode = 4
-        versionName = "1.04"
+        versionCode = 8
+        versionName = "1.08"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
