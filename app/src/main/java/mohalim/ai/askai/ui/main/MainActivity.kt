@@ -1,6 +1,7 @@
 package mohalim.ai.askai.ui.main
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color.parseColor
 import android.os.Bundle
@@ -21,13 +22,10 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -38,6 +36,7 @@ import androidx.compose.ui.text.googlefonts.Font
 import androidx.compose.ui.text.googlefonts.GoogleFont
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdSize
@@ -91,153 +90,15 @@ fun MainActivityUI(context: Activity) {
     )
     {
 
-
-        Row() {
-            /** Gemini **/
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(150.dp)
-                    .padding(5.dp)
-                    .weight(1f)
-                    .background(
-                        color = Color(parseColor("#E7CCCC")),
-                        shape = RoundedCornerShape(20.dp)
-                    )
-                    .padding(start = 16.dp, top = 16.dp, end = 16.dp)
-                    .clickable {
-                        val intent = Intent(context, ChatAIActivity::class.java)
-                        intent.putExtra("URL", "https://gemini.google.com/")
-                        context.startActivity(intent)
-                    }
-            ) {
-                Image(
-                    painterResource(id = R.drawable.bard),
-                    modifier = Modifier
-                        .width(70.dp)
-                        .height(70.dp),
-                    contentDescription = "Google Bard"
-                )
-                Text(
-                    text = "Gemini",
-                    fontFamily = fontFamily,
-                    fontWeight = FontWeight.Bold,
-                    color = Color(parseColor("#153448")),
-                    textAlign = TextAlign.Center
-                )
-                Text(
-                    text = "أسأل الذكاء الاصطناعي",
-                    fontFamily = fontFamily,
-                    textAlign = TextAlign.Center
-                )
-            }
-
-            /** Chat GPT **/
-
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(150.dp)
-                    .padding(5.dp)
-                    .weight(1f)
-                    .background(
-                        color = Color(parseColor("#153448")),
-                        shape = RoundedCornerShape(20.dp)
-                    )
-                    .padding(16.dp, 0.dp)
-                    .clickable {
-                        val intent = Intent(context, ChatAIActivity::class.java)
-                        intent.putExtra("URL", "https://chatgpt.com/")
-                        context.startActivity(intent)
-                    }
-            ) {
-
-
-                Image(
-                    painterResource(id = R.drawable.chat_gpt),
-                    modifier = Modifier
-                        .width(70.dp)
-                        .height(70.dp),
-                    contentDescription = "ChatGPT"
-                )
-                Text(
-                    text = "ChatGPT",
-                    fontFamily = fontFamily,
-                    fontWeight = FontWeight.Bold,
-                    color = Color(parseColor("#ffffff")),
-                    textAlign = TextAlign.Center
-
-                )
-                Text(
-                    text = "أسأل الذكاء الاصطناعي",
-                    fontFamily = fontFamily,
-                    textAlign = TextAlign.Center
-                )
-            }
-
-
-            /** AI CHATTING **/
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(150.dp)
-                    .padding(5.dp)
-                    .weight(1f)
-                    .background(
-                        color = Color(parseColor("#153448")),
-                        shape = RoundedCornerShape(20.dp)
-                    )
-                    .padding(16.dp, 0.dp)
-                    .clickable {
-                        val intent = Intent(context, ChatAIActivity::class.java)
-                        intent.putExtra("URL", "https://www.aichatting.net/")
-                        context.startActivity(intent)
-                    }
-            ) {
-
-
-                Image(
-                    painterResource(id = R.drawable.ai_chatting),
-                    modifier = Modifier
-                        .width(70.dp)
-                        .height(70.dp),
-                    contentDescription = "AI Chatting"
-                )
-                Text(
-                    text = "AIChatting",
-                    fontFamily = fontFamily,
-                    fontWeight = FontWeight.Bold,
-                    color = Color(parseColor("#ffffff")),
-                    textAlign = TextAlign.Center
-                )
-                Text(
-                    text = "أسأل الذكاء الاصطناعي",
-                    fontFamily = fontFamily,
-                    textAlign = TextAlign.Center
-                )
-            }
-        }
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        /** Adobe Firefly **/
-        /** https://www.adobe.com/sensei/generative-ai/firefly.html */
-
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center,
             modifier = Modifier
+                .padding(start = 5.dp, end = 5.dp, top = 5.dp)
                 .fillMaxWidth()
-                .padding(5.dp)
-                .weight(1f)
+                .height(150.dp)
                 .background(
-                    color = Color(parseColor("#009796")),
+                    color = Color(parseColor("#884040")),
                     shape = RoundedCornerShape(20.dp)
                 )
                 .padding(16.dp, 0.dp)
@@ -245,28 +106,80 @@ fun MainActivityUI(context: Activity) {
                     val intent = Intent(context, ChatAIActivity::class.java)
                     intent.putExtra(
                         "URL",
-                        "https://www.adobe.com/sensei/generative-ai/firefly.html"
+                        "https://chatgpt.com/"
                     )
                     context.startActivity(intent)
                 }
+                .padding(10.dp)
+
         ) {
 
             Image(
-                painterResource(id = R.drawable.firefly),
+                painterResource(id = R.drawable.chat_gpt),
                 modifier = Modifier
                     .width(70.dp)
                     .height(70.dp),
                 contentDescription = "Adobe Firefly"
             )
+
             Text(
-                text = "Adobe Firefly",
+                text = "ChatGPT",
                 fontFamily = fontFamily,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
+                color = Color(parseColor("#ffffff")),
+                textAlign = TextAlign.Center
             )
-            Text(text = "اصنع صور من مخيلتك", fontFamily = fontFamily)
+            Text(
+                text = "اسأل الذكاء الاصطناعي",
+                fontFamily = fontFamily,
+                color = Color(parseColor("#dadada")),
+                fontSize = 10.sp,
+                textAlign = TextAlign.Center
+            )
         }
 
-        Spacer(modifier = Modifier.height(50.dp))
+
+
+        ThreeRow(
+            context,
+            fontFamily,
+            "https://huggingface.co/chat/",
+            R.drawable.hugging_face,
+            "Hugging Face",
+            "أسأل الذكاء الاصطناعي",
+
+            "https://chatlyai.app/",
+            R.drawable.chat_gpt,
+            "ChatlyAI",
+            "أسأل الذكاء الاصطناعي",
+
+            "https://www.aichatting.net/",
+            R.drawable.ai_chatting,
+            "AIChatting",
+            "أسأل الذكاء الاصطناعي",
+        )
+        ThreeRow(
+            context,
+            fontFamily,
+
+            "https://poe.com/",
+            R.drawable.poe,
+            "Poe",
+            "أسأل الذكاء الاصطناعي",
+
+            "https://copilot.microsoft.com/",
+            R.drawable.copilot,
+            "Copilot",
+            "أسأل الذكاء الاصطناعي",
+
+            "https://www.perplexity.ai/",
+            R.drawable.perplexity,
+            "Perplexity",
+            "أسأل الذكاء الاصطناعي",
+        )
+
+        Spacer(modifier = Modifier.height(10.dp))
+
 
         val addview = AdView(context)
         addview.setAdSize(AdSize.LARGE_BANNER)
@@ -282,5 +195,214 @@ fun MainActivityUI(context: Activity) {
             }
         )
 
+        Spacer(modifier = Modifier.height(5.dp))
+
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
+            modifier = Modifier
+                .padding(start = 5.dp, end = 5.dp, top = 5.dp)
+                .fillMaxWidth()
+                .height(150.dp)
+                .background(
+                    color = Color(parseColor("#884040")),
+                    shape = RoundedCornerShape(20.dp)
+                )
+                .padding(16.dp, 0.dp)
+                .clickable {
+                    val intent = Intent(context, ChatAIActivity::class.java)
+                    intent.putExtra(
+                        "URL",
+                        "https://gemini.google.com/"
+                    )
+                    context.startActivity(intent)
+                }
+                .padding(10.dp)
+
+        ) {
+
+            Image(
+                painterResource(id = R.drawable.bard),
+                modifier = Modifier
+                    .width(70.dp)
+                    .height(70.dp),
+                contentDescription = "Gemini"
+            )
+
+            Text(
+                text = "Gemini",
+                fontFamily = fontFamily,
+                fontWeight = FontWeight.Bold,
+                color = Color(parseColor("#ffffff")),
+                textAlign = TextAlign.Center
+            )
+            Text(
+                text = "اسأل الذكاء الاصطناعي",
+                fontFamily = fontFamily,
+                color = Color(parseColor("#dadada")),
+                fontSize = 10.sp,
+                textAlign = TextAlign.Center
+            )
+        }
+
     }
+}
+
+@Composable
+fun ThreeRow(
+    context: Context,
+    fontFamily: FontFamily,
+    firstLink: String,
+    firstIcon: Int,
+    firstTitle: String,
+    firstDesc: String,
+    secondLink: String,
+    secondIcon: Int,
+    secondTitle: String,
+    secondDesc: String,
+    thirdLink: String,
+    thirdIcon: Int,
+    thirdTitle: String,
+    thirdDesc: String
+) {
+    Row() {
+        /** Gemini **/
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
+            modifier = Modifier
+                .padding(start = 5.dp, top = 5.dp)
+                .fillMaxWidth()
+                .height(150.dp)
+                .weight(1f)
+                .background(
+                    color = Color(parseColor("#E7CCCC")),
+                    shape = RoundedCornerShape(20.dp)
+                )
+                .clickable {
+                    val intent = Intent(context, ChatAIActivity::class.java)
+                    intent.putExtra("URL", firstLink)
+                    context.startActivity(intent)
+                }
+                .padding(10.dp)
+
+        ) {
+            Image(
+                painterResource(id = firstIcon),
+                modifier = Modifier
+                    .width(70.dp)
+                    .height(70.dp),
+                contentDescription = "Google Bard"
+            )
+            Text(
+                text = firstTitle,
+                fontFamily = fontFamily,
+                fontWeight = FontWeight.Bold,
+                color = Color(parseColor("#FF2E63EB")),
+                textAlign = TextAlign.Center
+            )
+            Text(
+                text = firstDesc,
+                fontFamily = fontFamily,
+                color = Color(parseColor("#545454")),
+                fontSize = 11.sp,
+                textAlign = TextAlign.Center
+            )
+        }
+
+        /** Chat GPT **/
+
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
+            modifier = Modifier
+                .padding(start = 5.dp, top = 5.dp, end = 5.dp)
+                .fillMaxWidth()
+                .height(150.dp)
+                .weight(1f)
+                .background(
+                    color = Color(parseColor("#E7CCCC")),
+                    shape = RoundedCornerShape(20.dp)
+                )
+                .clickable {
+                    val intent = Intent(context, ChatAIActivity::class.java)
+                    intent.putExtra("URL", secondLink)
+                    context.startActivity(intent)
+                }
+                .padding(10.dp)
+
+        ) {
+
+
+            Image(
+                painterResource(id = secondIcon),
+                modifier = Modifier
+                    .width(70.dp)
+                    .height(70.dp),
+                contentDescription = "ChatGPT"
+            )
+            Text(
+                text = secondTitle,
+                fontFamily = fontFamily,
+                fontWeight = FontWeight.Bold,
+                color = Color(parseColor("#FF2E63EB")),
+                textAlign = TextAlign.Center
+
+            )
+            Text(
+                text = secondDesc,
+                fontFamily = fontFamily,
+                color = Color(parseColor("#545454")),
+                fontSize = 11.sp,
+                textAlign = TextAlign.Center
+            )
+        }
+
+
+        /** AI CHATTING **/
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
+            modifier = Modifier
+                .padding(end = 5.dp, top = 5.dp)
+                .fillMaxWidth()
+                .height(150.dp)
+                .weight(1f)
+                .background(
+                    color = Color(parseColor("#E7CCCC")),
+                    shape = RoundedCornerShape(20.dp)
+                )
+                .clickable {
+                    val intent = Intent(context, ChatAIActivity::class.java)
+                    intent.putExtra("URL", thirdLink)
+                    context.startActivity(intent)
+                }
+                .padding(10.dp)
+        ) {
+
+
+            Image(
+                painterResource(id = thirdIcon),
+                modifier = Modifier
+                    .width(70.dp)
+                    .height(70.dp),
+                contentDescription = "AI Chatting"
+            )
+            Text(
+                text = thirdTitle,
+                fontFamily = fontFamily,
+                fontWeight = FontWeight.Bold,
+                color = Color(parseColor("#FF2E63EB")),
+                textAlign = TextAlign.Center
+            )
+            Text(
+                text = thirdDesc,
+                fontFamily = fontFamily,
+                color = Color(parseColor("#545454")),
+                fontSize = 10.sp,
+                textAlign = TextAlign.Center
+            )
+        }
+    }
+
 }
