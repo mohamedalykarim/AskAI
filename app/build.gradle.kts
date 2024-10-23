@@ -12,9 +12,9 @@ android {
     defaultConfig {
         applicationId = "mohalim.ai.askai"
         minSdk = 24
-        targetSdk = 33
-        versionCode = 8
-        versionName = "1.08"
+        targetSdk = 34
+        versionCode = 10
+        versionName = "1.10"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
