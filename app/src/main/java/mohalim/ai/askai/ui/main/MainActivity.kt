@@ -245,6 +245,26 @@ fun MainActivityUI(context: Activity) {
             )
         }
 
+        ThreeRow(
+            context,
+            fontFamily,
+
+            "https://hix.ai/ar",
+            R.drawable.hix,
+            "Hix AI",
+            "أسأل الذكاء الاصطناعي",
+
+            "https://app.leonardo.ai/",
+            R.drawable.leonardo,
+            "Leonardo",
+            "انشئ صور من مخيلتك",
+
+            "https://context.reverso.net/translation/",
+            R.drawable.reverso,
+            "Reverso Context",
+            "ترجمة وامثلة",
+        )
+
     }
 }
 
